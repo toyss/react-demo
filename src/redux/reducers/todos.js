@@ -11,11 +11,10 @@ export default function todos(state = [], action) {
         }
       ];
     case TOGGLE_TODO:
-      state.map((todo, index) => {
+      return state.map((todo, index) => {
         if (index === action.index) todo.completed = !todo.completed;
         return todo;
-      })
-      return state;
+      });
     default:
       return state;
   }

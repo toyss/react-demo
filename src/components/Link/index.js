@@ -2,22 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Link extends React.Component {
+  static propTypes = {
+    active: PropTypes.bool.isRequired,
+    children: PropTypes.node.isRequired,
+    onClick: PropTypes.func.isRequired
+  };
+
   render() {
-    if (this.props.active) return <span>{this.props.children}</span>;
+    const {active, children} = this.props;
+    const cln = 'App-link';
     return (
       <span
-        onClick={e => {
-          e.preventDefault();
-          this.props.onClick();
-        }}>
-        {this.props.children}  
+        className={cln}
+        onClick={active ? null : this.handleAClick}
+        style={{
+          cursor: 'pointer',
+          textDecoration: active ? 'underline' : 'none'
+        }}
+      >
+        {children}
       </span>
     );
   }
-}
 
-Link.propTypes = {
-  active: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired
-};
+  // event methods
+  // ****************************************
+  handleAClick = (e) => {
+    e.preventDefault();
+    this.props.onClick();
+  }
+  // ****************************************
+
+}

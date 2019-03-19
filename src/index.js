@@ -1,24 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
 import './assets/css/index.css';
-import App from './page/App';
 import store from './redux/store';
-import { todos, visibilityFilter } from './redux/actions';
+import App from './page/App';
 
-console.log(store.getState());
-
-const unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
+const VIRTUAL_DOM = (
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
 
-store.dispatch(todos.add('今天要学完redux'));
-store.dispatch(todos.add('今天要学习redux的示例代码'));
-store.dispatch(todos.toggle(0));
-
-unsubscribe();
-store.dispatch(visibilityFilter.set('123'));
-
-console.log(store.getState())
-
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(VIRTUAL_DOM, document.getElementById('root'));

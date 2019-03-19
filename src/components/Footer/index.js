@@ -1,23 +1,17 @@
 import React from 'react';
 
-import FilterLink from '../container/FilterLink';
+import { VisibilityFilters } from '../../redux/actions/visibilityFilter';
+import FilterLink from '../../containers/FilterLink'
 
 export default class Footer extends React.Component {
   render() {
     return (
-      <p>
-        Show: {' '}
-        <FilterLink filter="SHOW_ALL">
-          All
-        </FilterLink>
+      <p className="App-footer">
+        Show: <FilterLink filter={VisibilityFilters.SHOW_ALL}>All</FilterLink>
         {', '}
-        <FilterLink filter="SHOW_ACTIVE">
-          Active
-        </FilterLink>
+        <FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>Active</FilterLink>
         {', '}
-        <FilterLink filter="SHOW_COMPLETED">
-          Completed
-        </FilterLink>
+        <FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>Completed</FilterLink>
       </p>
     );
   }
